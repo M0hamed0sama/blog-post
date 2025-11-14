@@ -25,24 +25,22 @@ const editArticle  = async(req, res) => {
         res.json(article);
 }
     
-const addArticle = async (req, res) => {
-        const {article , articleContent } = req.body;
-        const temp = await counterModel.findOneAndUpdate(
-            { seq_name: 'Article' },
-            { $inc: { seq_value: 1 } });
-        const counter = temp.seq_value;
-
-        const newArticle = new model({
-            id : counter,
-            article : article,
-            articleContent : articleContent
-        })
-        await newArticle.save();
-        res.json({ message: "article inserted" });
+const addManyArticles = async (req,res) =>{
+    let articles = req.body;
+    articles = articles.data;
+    await model.insertMany(articles)
+    .then((data)=>{
+        console.log('data inserted!\n');
+        console.log(data);
+    })
+    .catch((err)=>{
+        console.error(err);
+    });
+    res.json({ message: "data inserted!"});
 }
 
 export {
     getArticles,
     editArticle,
-    addArticle
+    addManyArticles
 }

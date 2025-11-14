@@ -3,6 +3,7 @@ import 'dotenv/config';
 
 const authentication = async(req, res, next) => {
     const token = req.headers['token'];
+    console.log(token);
     if (!token) {
         return res.status(500).json({
             success: false,
@@ -17,32 +18,25 @@ const authentication = async(req, res, next) => {
         console.error(err);
         return res.status(500).json({
             success: false,
-            message: 'Error occured!'
+            message: 'Error occured while authentication'
         })
     }
 }
 
 const autherization = (Role) => {
-    try {
-      return async (req, res, next) => {
-            const role = +req.user.role;
-            if (!role || role > Role) {
-                console.log(req.user)
-                console.log(role);
-                return res.status(403).json({
-                    success: false,
-                    message: "Access denied."
-                });
-            }
-        next();
+    return async (req, res, next) => {
+        const role = +req.user.role;
+        if (!role || role > Role) {
+            console.log(req.user)
+            console.log(role);
+            return res.status(403).json({
+                success: false,
+                message: "Access denied."
+            });
         }
-    }catch (e) {
-        console.error(e);
-        return res.status(500).json({
-            success: false,
-            message: "Error occured while autherization"
-        })
+    next();
     }
+   
 }
 export {
     authentication,

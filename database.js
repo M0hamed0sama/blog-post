@@ -4,11 +4,11 @@ import 'dotenv/config'
 
 const DB = async () => {
     try {
-        mongoose.connect(process.env.MONGO_URL)
+        mongoose.connect(process.env.MONGO_URI)
         
         console.log('Database connected successfully');
-    }  catch (e) {
-        console.log('Database failed to connect',e.message);
+    }  catch (err) {
+        console.log('Database failed to connect',err.message);
         process.exit(1);
     }
 }

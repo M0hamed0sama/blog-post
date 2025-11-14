@@ -1,1 +1,11 @@
+<<<<<<< HEAD
 /node_modules/
+=======
+node_modules
+.env
+package.json
+package-lock.json
+
+/node_modules/
+
+>>>>>>> ac43e98 (v1)

@@ -1,0 +1,56 @@
+
+{
+  "articles" :[
+    { "title": "Getting Started with Node.js", "content": "Learn how to install Node.js and create your first server.", "category": "Backend", "tags": ["nodejs", "javascript", "express"] },
+    { "title": "Understanding Express.js", "content": "A beginner-friendly guide to Express.js and routing.", "category": "Backend", "tags": ["express", "nodejs"] },
+    { "title": "MongoDB for Beginners", "content": "Learn how MongoDB stores data and how to query collections.", "category": "Database", "tags": ["mongodb", "nosql"] },
+    { "title": "CRUD Operations in MongoDB", "content": "Create, Read, Update, and Delete operations explained.", "category": "Database", "tags": ["mongodb", "crud"] },
+    { "title": "REST API Design", "content": "Best practices for designing RESTful APIs.", "category": "API", "tags": ["api", "rest", "design"] },
+    { "title": "API Integration Basics", "content": "How to integrate third-party APIs in Node.js.", "category": "API", "tags": ["api", "integration"] },
+    { "title": "JWT Authentication", "content": "Implement authentication using JWT in Express.", "category": "Security", "tags": ["jwt", "auth", "security"] },
+    { "title": "Password Hashing with bcrypt", "content": "Secure user passwords using bcrypt in Node.js.", "category": "Security", "tags": ["bcrypt", "security"] },
+    { "title": "Async/Await in JavaScript", "content": "Master asynchronous programming with async/await.", "category": "JavaScript", "tags": ["javascript", "async"] },
+    { "title": "Promises Explained", "content": "Learn how Promises work in JavaScript.", "category": "JavaScript", "tags": ["javascript", "promises"] },
+
+    { "title": "Event Loop in Node.js", "content": "Understand how the Node.js event loop works.", "category": "Backend", "tags": ["nodejs", "event-loop"] },
+    { "title": "Building REST APIs with Express", "content": "Step-by-step guide to building REST APIs.", "category": "API", "tags": ["express", "api"] },
+    { "title": "Middleware in Express", "content": "How middleware works and how to write custom middleware.", "category": "Backend", "tags": ["express", "middleware"] },
+    { "title": "Error Handling in Express", "content": "Handle errors properly in your Express apps.", "category": "Backend", "tags": ["express", "errors"] },
+    { "title": "Rate Limiting APIs", "content": "Protect your API using rate limiting techniques.", "category": "Security", "tags": ["api", "security"] },
+    { "title": "CORS Explained", "content": "Understand Cross-Origin Resource Sharing.", "category": "Security", "tags": ["cors", "security"] },
+    { "title": "Environment Variables in Node.js", "content": "Manage secrets using environment variables.", "category": "Backend", "tags": ["nodejs", "env"] },
+    { "title": "Configuring dotenv", "content": "Use dotenv to manage environment variables.", "category": "Backend", "tags": ["dotenv", "nodejs"] },
+    { "title": "Pagination in MongoDB", "content": "Implement pagination using limit and skip.", "category": "Database", "tags": ["mongodb", "pagination"] },
+    { "title": "Indexing in MongoDB", "content": "Improve query performance with indexes.", "category": "Database", "tags": ["mongodb", "indexing"] },
+
+    { "title": "Mongoose Schemas Explained", "content": "How to design schemas using Mongoose.", "category": "Database", "tags": ["mongoose", "schema"] },
+    { "title": "Mongoose Validation", "content": "Add validation rules to your schemas.", "category": "Database", "tags": ["mongoose", "validation"] },
+    { "title": "Deploying Node.js Apps", "content": "How to deploy Node.js apps to production.", "category": "DevOps", "tags": ["deployment", "nodejs"] },
+    { "title": "Using PM2 for Node.js", "content": "Keep your Node.js app running with PM2.", "category": "DevOps", "tags": ["pm2", "nodejs"] },
+    { "title": "Docker for Node.js", "content": "Containerize your Node.js app using Docker.", "category": "DevOps", "tags": ["docker", "nodejs"] },
+    { "title": "Logging in Node.js", "content": "Implement logging using Winston.", "category": "Backend", "tags": ["logging", "winston"] },
+    { "title": "Testing APIs with Postman", "content": "Test your APIs using Postman.", "category": "Testing", "tags": ["postman", "api"] },
+    { "title": "Unit Testing with Jest", "content": "Write unit tests using Jest.", "category": "Testing", "tags": ["jest", "testing"] },
+    { "title": "Integration Testing APIs", "content": "Test full API workflows.", "category": "Testing", "tags": ["testing", "api"] },
+    { "title": "Secure Headers in Express", "content": "Use Helmet to secure HTTP headers.", "category": "Security", "tags": ["helmet", "security"] },
+
+    { "title": "File Uploads in Node.js", "content": "Handle file uploads using Multer.", "category": "Backend", "tags": ["multer", "uploads"] },
+    { "title": "Image Upload to Cloudinary", "content": "Upload images to Cloudinary using Node.js.", "category": "Backend", "tags": ["cloudinary", "uploads"] },
+    { "title": "Building a Blog API", "content": "Create a blog API using Node.js and MongoDB.", "category": "Project", "tags": ["project", "api"] },
+    { "title": "User Authentication Flow", "content": "Design a complete user auth flow.", "category": "Security", "tags": ["auth", "jwt"] },
+    { "title": "API Versioning", "content": "How to version your APIs properly.", "category": "API", "tags": ["api", "versioning"] },
+    { "title": "Caching with Redis", "content": "Speed up your API using Redis cache.", "category": "Performance", "tags": ["redis", "cache"] },
+    { "title": "Improving API Performance", "content": "Techniques to improve API response time.", "category": "Performance", "tags": ["performance", "api"] },
+    { "title": "Load Testing APIs", "content": "Test API performance under load.", "category": "Testing", "tags": ["load-testing", "api"] },
+    { "title": "Web Security Basics", "content": "Common web security vulnerabilities explained.", "category": "Security", "tags": ["security", "web"] },
+
+    { "title": "OAuth 2.0 Explained", "content": "Understand OAuth 2.0 authorization flow.", "category": "Security", "tags": ["oauth", "security"] },
+    { "title": "Building Real-time Apps with Socket.io", "content": "Create real-time apps using Socket.io.", "category": "Backend", "tags": ["socket.io", "realtime"] },
+    { "title": "WebSockets in Node.js", "content": "Real-time communication using WebSockets.", "category": "Backend", "tags": ["websockets", "nodejs"] },
+    { "title": "Microservices Basics", "content": "Introduction to microservices architecture.", "category": "Architecture", "tags": ["microservices", "architecture"] },
+    { "title": "Monolith vs Microservices", "content": "Compare monolith and microservices.", "category": "Architecture", "tags": ["architecture", "microservices"] },
+    { "title": "API Gateway Pattern", "content": "Use API Gateway in microservices.", "category": "Architecture", "tags": ["api-gateway", "microservices"] },
+    { "title": "Clean Code for Backend", "content": "Write clean and maintainable backend code.", "category": "Best Practices", "tags": ["clean-code", "backend"] },
+    { "title": "Project Structure in Node.js", "content": "Organize your Node.js project structure.", "category": "Best Practices", "tags": ["nodejs", "structure"] }
+    ]
+}

@@ -1,6 +1,4 @@
 import express from 'express';
-import { model } from '../model/schema.js';
-import { counterModel } from '../model/counters.js';
 import * as userFunctions from '../controllers/userFunctions.js';
 import {login, register} from '../controllers/register.js'
 import {authentication,autherization} from '../middlewares/auth.js'

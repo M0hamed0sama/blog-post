@@ -1,9 +1,11 @@
 import mongoose from 'mongoose';
 
 const article = new mongoose.Schema({
-    id : Number,
-    article : String,
-    articleContent : String,
+    id : {type : Number},
+    title : {type : String , trim : true},
+    content : {type : String , trim : true},
+    category : {type : String, trim : true},
+    tags : {type :   Array},
     creationDate : {type : Date , default : Date.now}  
 });
 

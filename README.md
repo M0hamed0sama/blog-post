@@ -1,8 +1,10 @@
 # Blog Post API
 
+<<<<<<< HEAD
+https://roadmap.sh/projects/personal-blog
+
 A simple Express + MongoDB API for managing blog articles with JWT-based authentication and role-based authorization. Normal users (role 2) can view articles, and admins (role 1) can create and manage content.
 
-https://roadmap.sh/projects/personal-blog
 
 ## Features
 - Authentication: JWT login with bcrypt password hashing
@@ -10,123 +12,186 @@ https://roadmap.sh/projects/personal-blog
 - Articles: List all articles, get one by id (users), add new article (admin)
 - Users: Register and login endpoints
 - MongoDB: Mongoose models for `Article`, `User`, and an auto-increment `Counter`
+=======
+Roadmap project: https://roadmap.sh/projects/personal-blog
+
+Express + MongoDB REST API with JWT authentication and simple role-based authorization.
+>>>>>>> 562d60f (1-Modifications on the article schema. Removal of the counters)
 
 ## Tech Stack
-- Node.js, Express (ES Modules)
-- MongoDB, Mongoose
-- JWT (`jsonwebtoken`), `bcrypt`
-- `dotenv`, `cors`, `express-validator`
-- Dev: `nodemon`
+- Node.js (ES Modules)
+- Express
+- MongoDB + Mongoose
+- Auth: JWT (jsonwebtoken) + bcrypt
+- Utilities: dotenv, cors
 
-## Project Structure
-```
-controllers/
-  adminFunctions.js
-  register.js
-  userFunctions.js
-middlewares/
-  auth.js
-model/
-  counters.js
-  schema.js
-  user.js
-routes/
-  admin.js
-  user.js
-index.js
-database.js
-package.json
-```
+## Getting Started
 
-## Prerequisites
+### Prerequisites
 - Node.js 18+
-- MongoDB running locally or a connection string to a MongoDB instance
+- A MongoDB instance (local or remote)
 
-## Environment Variables
-Create a `.env` file at the project root with:
-```
+### Environment Variables
+Create a `.env` file in the project root:
+
+```env
 PORT=4000
-MONGO_URL=mongodb://localhost:27017/
-JWT_SECRET=change-me-to-a-strong-secret
+MONGO_URI=mongodb://localhost:27017/<db-name>
+JWT_SECRET=replace-with-a-strong-secret
 ```
-Notes:
-- The app reads `MONGO_URL`, `JWT_SECRET`, and optional `PORT`.
-- Ensure `.env` is not committed to version control in real projects.
 
-## Install & Run
-Install dependencies:
-```cmd
+Notes:
+- The code reads `MONGO_URI`, `JWT_SECRET`, and optional `PORT`.
+- This repo currently contains a `.env`. If it includes a real secret, rotate it.
+
+### Install
+
+```bash
 npm install
 ```
-Run with nodemon:
-```cmd
+
+### Run (dev)
+
+```bash
 npm run runs
 ```
-Or run directly:
-```cmd
-node index.js
+
+The server listens on `http://localhost:${PORT}` (defaults to 4000).
+
+## Seed Data (optional)
+
+There is a simple seed script that inserts the articles from `data.json`:
+
+```bash
+node dataInsertion.js
 ```
-The server starts on `http://localhost:<PORT>` (default 4000).
 
-## API Overview
-Base URLs set in `index.js`:
-- User routes base: `/api`
-- Admin routes base: `/`
+It connects using `MONGO_URI` and inserts `data.json.articles` into the `Article` collection.
 
-Auth header for protected routes:
-- Header: `token: <JWT>`
+## Authentication & Authorization
 
-### Auth & User
-- POST `/api/register`
-  - Body: `{ username, firstname, lastname, email, password }`
-  - Registers a new user with default role `2` (standard user)
-- POST `/api/login`
-  - Body: `{ username, password }` where `username` can be email or username
-  - Returns: `{ success, message, token }`
+### Token header
+Protected routes expect the JWT in a custom header:
 
-### User Articles (role <= 2)
-- GET `/api/home`
-  - Header: `token: <JWT>`
-  - Returns list of article titles: `{ articles: [{ article }] }`
-- GET `/api/article/:id`
-  - Header: `token: <JWT>`
-  - Returns article content by numeric `id`
+```
+token: <JWT>
+```
 
-### Admin Articles (role <= 1)
-- GET `/admin`
-  - Header: `token: <JWT>`
-  - Returns list of article titles (admin view)
-- GET `/edit/:id`
-  - Header: `token: <JWT>`
-  - Intended to fetch a single article for editing
-- POST `/new`
-  - Header: `token: <JWT>`
-  - Body: `{ article, articleContent }`
-  - Creates a new article; uses a `Counter` to auto-increment `id`
+### Roles
+- New users default to role `2`.
+- Admin access is role `1`.
+- Authorization logic is: allow when `user.role <= requiredRole`.
 
-## Middleware
-- `authentication` (middlewares/auth.js)
-  - Verifies JWT from header `token` and attaches `req.user`
-- `autherization(Role)` (middlewares/auth.js)
-  - Allows access if the numeric user role is `<= Role`
-  - Example: `autherization(2)` → users and admins; `autherization(1)` → admins only
+JWTs issued by login expire in 15 minutes.
+
+## API
+
+Routes are mounted like this:
+- User/auth routes: `/api` (see routes/user.js)
+- Admin routes: `/` (see routes/admin.js)
+
+### Auth
+
+#### POST /api/register
+Registers a new user.
+
+Body:
+```json
+{
+  "username": "jdoe",
+  "firstname": "John",
+  "lastname": "Doe",
+  "email": "jdoe@example.com",
+  "password": "secret"
+}
+```
+
+#### POST /api/login
+Logs in with either email or username.
+
+Body:
+```json
+{ "username": "jdoe@example.com", "password": "secret" }
+```
+
+Response:
+```json
+{ "success": true, "message": "Logged in successfully!", "token": "..." }
+```
+
+### User article endpoints (requires role 1 or 2)
+
+#### GET /api/home?page=0
+Returns articles (paginated).
+
+- Query: `page` (number). The code uses `skip(page * 10).limit(10)`.
+- Response: `{ "articles": [...] }`
+
+#### GET /api/article/:id
+Returns a single article by MongoDB `_id`.
+
+- Path param: `id` must be the document `_id` (ObjectId string)
+- Response is the result of a Mongoose `find(...)` call (an array)
+
+### Admin endpoints (requires role 1)
+
+#### GET /admin
+Returns a list of articles.
+
+#### GET /edit/:id
+Currently wired to the same handler as `GET /admin`.
+
+#### POST /new
+Inserts many articles.
+
+Body:
+```json
+{
+  "data": [
+    { "title": "A", "content": "B", "category": "C", "tags": ["x"] }
+  ]
+}
+```
+
+Response:
+```json
+{ "message": "data inserted!" }
+```
 
 ## Data Models
-- `Article` (model/schema.js): `{ id: Number, article: String, articleContent: String, creationDate: Date }`
-- `User` (model/user.js): `{ username, email, firstname, lastname, password, role=2 }`
-- `Counter` (model/counters.js): `{ seq_name, seq_value }` for auto-increment sequences
 
-## Development Notes
-- Requests expect/return JSON and the app uses `express.json()`.
-- CORS is enabled globally via `cors()`.
-- Validation is set up in the register controller via `express-validator` (ensure validators are applied where needed).
-- JWTs are signed with `JWT_SECRET` and expire in 15 minutes in the login flow.
+### Article
+Stored in MongoDB as `Article`:
 
-## Quick Test Flow
-1. Register a user via `POST /api/register`.
-2. Login via `POST /api/login` to get a JWT.
-3. Call user endpoints with `token` header.
-4. To test admin endpoints, set the user `role` to `1` in the DB.
+```js
+{
+  id: Number,           // optional
+  title: String,
+  content: String,
+  category: String,
+  tags: Array,
+  creationDate: Date
+}
+```
+
+### User
+Stored in MongoDB as `User`:
+
+```js
+{
+  username: String,
+  email: String,
+  firstname: String,
+  lastname: String,
+  password: String,     // bcrypt hash
+  role: Number          // defaults to 2
+}
+```
+
+## Known Issues / Mismatches
+- `GET /admin` uses a projection field `article` that does not exist in the Article schema (schema uses `title` and `content`).
+- `GET /edit/:id` is routed to the list handler; there is an `editArticle` controller that is not currently used by the route.
+- The project includes a `Counter` model, but it is not currently used by any route.
 
 ## License
 ISC
