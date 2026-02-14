@@ -1,9 +1,6 @@
 # Blog Post API
-
-<<<<<<< HEAD
-<<<<<<< HEAD
 =======
->>>>>>> refs/remotes/origin/main
+
 https://roadmap.sh/projects/personal-blog
 
 A simple Express + MongoDB API for managing blog articles with JWT-based authentication and role-based authorization. Normal users (role 2) can view articles, and admins (role 1) can create and manage content.
